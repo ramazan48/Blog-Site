@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const AddBlog = () => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [date, setDate] = useState('');
   const [content, setContent] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,13 +36,12 @@ const AddBlog = () => {
       setDate('');
       setContent('');
 
-
-      const updatedBlogsResponse = await fetch('http://localhost:3000/posts');
-      const updatedBlogs = await updatedBlogsResponse.json();
-  
+      navigate('/');
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error adding blog:', error);
     }
+
+  
   };
 
   return (

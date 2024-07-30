@@ -37,20 +37,24 @@ const Home = () => {
         }
       };
   return (
-    <div>
-    <h1>Blog Posts</h1>
+    <div className="container">
+    <h1 className='header'>Blog Posts</h1>
+    <div className='button-container'>
     <Link to="/AddBlog">
-      <button>Add New Blog</button>
+      <button className="add-blog-button">Add New Blog</button>
     </Link>
+    </div>
+    <div className='blog-list'>
     {blogs.map((blog) => (
-      <div key={blog.id}>
-        <h2>{blog.title}</h2>
-        <p>{blog.content}</p>
-        <p>Author: {blog.author}</p>
-        <p>Date: {blog.date}</p>
-        <button onClick={() => handleDelete(blog.id)}>Delete</button>
+      <div className="blog-item" key={blog.id}>
+        <h2 className='blog-title'>{blog.title}</h2>
+        <p className='blog-content'>Content: {blog.content}</p>
+        <p className='blog-meta'>Author: {blog.author}</p>
+        <p className='blog-meta'>Date: {blog.date}</p>
+        <button className="delete-button" onClick={() => handleDelete(blog.id)}>Delete</button>
       </div>
     ))}
+    </div>
   </div>
   );
 }

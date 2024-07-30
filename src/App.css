@@ -1,31 +1,107 @@
-.App {
-  text-align: center;
-  padding: 20px;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  border: 1px solid #ddd;
-  margin: 10px 0;
-  padding: 10px;
-  border-radius: 5px;
-  text-align: left;
-}
-
-h2 {
+body {
+  font-family: 'Arial', sans-serif;
   margin: 0;
-  font-size: 1.5em;
+  padding: 0;
+  background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+  color: #333;
 }
 
-p {
-  margin: 10px 0;
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+.button-container{
+  text-align: center;
 }
 
-small {
-  display: block;
-  color: #666;
+.header {
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  color: #00796b;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.add-blog-button {
+  margin-bottom: 20px;
+  background: #ff5722;
+  color: #fff;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  transition: background 0.3s, transform 0.3s;
+  display: inline-block;
+}
+
+.add-blog-button:hover {
+  background: #e64a19;
+  transform: scale(1.05);
+}
+
+.add-blog-button:active {
+  background: #d84315;
+  transform: scale(1.02);
+}
+
+.blog-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.blog-item {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.blog-item:hover {
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px);
+}
+
+.blog-title {
+  font-size: 2rem;
+  margin: 0 0 0.5rem;
+  color: #004d40;
+}
+
+.blog-meta {
+  font-size: 0.9rem;
+  color: #00796b;
+  margin: 0 0 1rem;
+}
+
+.blog-content {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+  overflow-wrap: break-word;
+}
+
+.delete-button {
+  background: #f44336;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.delete-button:hover {
+  background: #c62828;
+  transform: scale(1.05);
+}
+
+.delete-button:active {
+  background: #b71c1c;
+  transform: scale(1.02);
 }
