@@ -45,45 +45,50 @@ const AddBlog = () => {
   };
 
   return (
-    <div>
+    <div className='add-blog-form'>
       <h2>Add New Blog</h2>
       <form onSubmit={handleSubmit}>
-        <label>
+        <div className='form-group'>
           Title:
           <input
             type="text"
             value={title}
+            className='form-input'
             onChange={(e) => setTitle(e.target.value)}
           />
-        </label>
+        </div>
         <br />
-        <label>
+        <div className='form-group'>
           Author:
           <input
             type="text"
             value={author}
+            className='form-input'
             onChange={(e) => setAuthor(e.target.value)}
           />
-        </label>
+        </div>
         <br />
-        <label>
+        <div  className='form-group'>
           Date:
           <input
             type="date"
             value={date}
+            className='form-input'
             onChange={(e) => setDate(e.target.value)}
           />
-        </label>
+        </div>
         <br />
-        <label>
+        <div className='form-group'>
           Content:
+          <br />
           <textarea
             value={content}
+            className='form-textarea'
             onChange={(e) => setContent(e.target.value)}
           />
-        </label>
+        </div>
         <br />
-        <button type="submit">Add Blog</button>
+        <button type="submit" className='submit-button'>Add Blog</button>
       </form>
     </div>
   );
