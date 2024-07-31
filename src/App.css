@@ -35,6 +35,7 @@ body {
   font-size: 1.2rem;
   transition: background 0.3s, transform 0.3s;
   display: inline-block;
+  cursor: pointer;
 }
 
 .add-blog-button:hover {
