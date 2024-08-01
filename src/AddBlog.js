@@ -45,7 +45,7 @@ const AddBlog = () => {
   };
 
   return (
-    <div className='add-blog-form'>
+    <div className='add-blog-form margarine-regular'>
       <h2>Add New Blog</h2>
       <form onSubmit={handleSubmit}>
         <div className='form-group'>
@@ -54,6 +54,7 @@ const AddBlog = () => {
             type="text"
             value={title}
             className='form-input'
+            required
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
@@ -64,6 +65,7 @@ const AddBlog = () => {
             type="text"
             value={author}
             className='form-input'
+            required
             onChange={(e) => setAuthor(e.target.value)}
           />
         </div>
@@ -74,6 +76,7 @@ const AddBlog = () => {
             type="date"
             value={date}
             className='form-input'
+            required
             onChange={(e) => setDate(e.target.value)}
           />
         </div>
@@ -84,6 +87,7 @@ const AddBlog = () => {
           <textarea
             value={content}
             className='form-textarea'
+            required
             onChange={(e) => setContent(e.target.value)}
           />
         </div>

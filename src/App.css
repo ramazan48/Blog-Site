@@ -1,13 +1,17 @@
+.margarine-regular {
+  font-family: "Margarine", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
 body {
-  font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+  /*to add different 2 colors background left and right, smooth transition*/
+  background: linear-gradient(135deg, #e0f7fa, #ffbb87);
   color: #333;
 }
 
 .container {
-  width: 90%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
@@ -21,32 +25,54 @@ body {
   align-items: center;
   margin-bottom: 2rem;
   font-size: 2.5rem;
-  color: #00796b;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  color:rgb(255, 0, 0);
+  text-shadow: 2px 2px 4px rgb(255, 96, 96);
   text-align: center;
 }
 
 .add-blog-button {
-  margin-bottom: 20px;
-  background: #ff5722;
+ padding: 1.1em 2em;
+ background: none;
+ border: 2px solid #fff;
+ font-size: 15px;
+ color: #131313;
+ cursor: pointer;
+ position: relative;
+ overflow: hidden;
+ transition: all 0.3s;
+ border-radius: 12px;
+ background-color: #ffff4d;
+ font-weight: bolder;
+ box-shadow: 0 2px 0 2px #000;
+ margin-bottom: 20px;
+}
+
+
+.add-blog-button:before {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 120%;
+  background-color: #ff6700;
+  top: 50%;
+  transform: skewX(30deg) translate(-150%, -50%);
+  transition: all 0.5s;
+ }
+ 
+ .add-blog-button:hover {
+  background-color: #4cc9f0;
   color: #fff;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  font-size: 1.2rem;
-  transition: background 0.3s, transform 0.3s;
-  display: inline-block;
-  cursor: pointer;
-}
-
-.add-blog-button:hover {
-  background: #e64a19;
-  transform: scale(1.05);
-}
-
-.add-blog-button:active {
-  background: #d84315;
-  transform: scale(1.02);
-}
+  box-shadow: 0 2px 0 2px #0d3b66;
+ }
+ 
+ .add-blog-button:hover::before {
+  transform: skewX(30deg) translate(150%, -50%);
+  transition-delay: 0.1s;
+ }
+ 
+ .add-blog-button:active {
+  transform: scale(0.9);
+ }
 
 .blog-list {
   display: flex;
@@ -70,19 +96,22 @@ body {
 .blog-title {
   font-size: 2rem;
   margin: 0 0 0.5rem;
-  color: #004d40;
+  color:rgb(0, 255, 255);
+  text-shadow: 2px 2px 4px #07474e;
 }
 
 .blog-meta {
   font-size: 0.9rem;
   color: #00796b;
   margin: 0 0 1rem;
+  text-shadow: 2px 2px 4px #6dffee;
 }
 
 .blog-content {
   font-size: 1rem;
-  color: #555;
+  color: #3a3939;
   line-height: 1.6;
+  /*It is used to break the line and expand the words vertically (if the words aren't seen horizontally you can use it to expand vertically)*/
   overflow-wrap: break-word;
 }
 
@@ -95,11 +124,13 @@ body {
   cursor: pointer;
   font-size: 0.9rem;
   transition: background 0.3s, transform 0.3s;
+  text-shadow: 2px 2px 4px rgb(0, 0, 0);
 }
+
 
 .delete-button:hover {
   background: #c62828;
-  transform: scale(1.05);
+  animation: shake3856 0.3s linear infinite both;
 }
 
 .delete-button:active {
@@ -124,6 +155,7 @@ body {
   font-size: 1.8rem;
   color: #2c3e50;
   margin-bottom: 20px;
+  text-shadow: 1px 1px 2px #121a21;
 }
 
 
@@ -136,6 +168,7 @@ body {
   background-color: #f9f9f9;
   transition: border-color 0.3s ease;
   margin-left: 10px;
+  text-shadow: 1px 1px 2px #77a4d0;
 }
 
 .form-input:focus, .form-textarea:focus {
@@ -159,12 +192,14 @@ body {
   font-size: 1rem;
   font-weight: bold;
   transition: background-color 0.3s ease, transform 0.3s ease;
+  text-shadow: 2px 2px 4px rgb(66, 66, 66);
   text-align: center;
 }
 
 .submit-button:hover {
   background-color: #2980b9;
   transform: translateY(-2px);
+  animation: shake3856 0.3s linear infinite both;
 }
 
 .submit-button:active {
@@ -180,8 +215,41 @@ body {
   flex-direction: column;
   width: 100%;
   margin-bottom: 15px;
+  text-shadow: 1px 1px 2px rgb(116, 116, 116);
 }
 
 .form-group textarea {
   margin-top: 5px;
 }
+@keyframes shake3856 {
+  0% {
+  -webkit-transform: translate(0);
+  transform: translate(0);
+  }
+
+  20% {
+  -webkit-transform: translate(-2px, 2px);
+  transform: translate(-2px, 2px);
+  }
+
+  40% {
+  -webkit-transform: translate(-2px, -2px);
+  transform: translate(-2px, -2px);
+  }
+
+  60% {
+  -webkit-transform: translate(2px, 2px);
+  transform: translate(2px, 2px);
+  }
+
+  80% {
+  -webkit-transform: translate(2px, -2px);
+  transform: translate(2px, -2px);
+  }
+
+  100% {
+  -webkit-transform: translate(0);
+  transform: translate(0);
+  }
+}
+
