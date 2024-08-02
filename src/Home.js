@@ -38,7 +38,7 @@ const Home = () => {
       };
   return (
     <div className="container margarine-regular">
-    <h1 className='header'>Blog Posts</h1>
+    <div className='header-div'><h1 className='header'>Blog Posts</h1></div>
     <div className='button-container'>
     <Link to="/AddBlog">
       <button className="add-blog-button">Add New Blog</button>
