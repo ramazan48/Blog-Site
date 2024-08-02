@@ -10,6 +10,10 @@ app.use(express.json());
 const filePath = './blogposts.json';
 
 app.get('/posts', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'BlogPosts.json'));
+});
+
+app.get('/posts', (req, res) => {
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
       res.status(500).send('Error reading data');
