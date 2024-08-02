@@ -21,7 +21,7 @@ const AddBlog = () => {
     };
 
     try {
-      const response = await fetch('https://grand-unicorn-c0189b.netlify.app/BlogPosts.json', {
+      const response = await fetch('https://grand-unicorn-c0189b.netlify.app/posts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newBlog),
