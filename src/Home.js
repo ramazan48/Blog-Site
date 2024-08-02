@@ -7,15 +7,15 @@ const Home = () => {
     useEffect(() => {
       const fetchBlogs = async () => {
         try {
-          const response = await fetch('http://localhost:3000/posts');
-          if (!response.ok) {
-            throw new Error('Failed to fetch blogs');
-          }
-          const data = await response.json();
-          setBlogs(data);
-        } catch (error) {
-          
-        }
+          const response = await fetch('https://grand-unicorn-c0189b.netlify.app/BlogPosts.json');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch blogs');
+                }
+                const data = await response.json();
+                setBlogs(data);
+            } catch (error) {
+                console.error('Error fetching blogs:', error);
+            }
       };
   
       fetchBlogs();
@@ -23,7 +23,7 @@ const Home = () => {
   
     const handleDelete = async (id) => {
         try {
-          const response = await fetch(`http://localhost:3000/posts/${id}`, {
+          const response = await fetch(`https://grand-unicorn-c0189b.netlify.app/BlogPosts.json`, {
             method: 'DELETE',
           });
       
