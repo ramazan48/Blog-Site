@@ -21,7 +21,7 @@ const AddBlog = () => {
     };
 
     try {
-      const response = await fetch('/api/addBlog', {
+      const response = await fetch('http://blog-site-pink-eight/api/addBlog', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newBlog),

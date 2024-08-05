@@ -1,9 +1,11 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const cors = require('cors'); // CORS ayarları
 const app = express();
 
 app.use(express.json());
+app.use(cors()); // CORS middleware ekleme
 
 const jsonFilePath = path.join(__dirname, 'BlogPosts.json');
 
