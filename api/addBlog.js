@@ -1,29 +1,20 @@
 // api/addBlog.js
-import fs from 'fs';
-import path from 'path';
+import Cors from 'cors';
+import initMiddleware from '../../lib/init-middleware'; // `lib/init-middleware.js` dosyasını oluşturun.
 
-const jsonFilePath = path.join(process.cwd(), 'public', 'BlogPosts.json');
+// Initialize the CORS middleware
+const cors = initMiddleware(
+  Cors({
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    origin: '*', // Belirli bir domain de belirtebilirsiniz.
+  })
+);
 
 export default async function handler(req, res) {
+  await cors(req, res); // CORS middleware'yi çağırın
+
   if (req.method === 'POST') {
-    const newBlog = req.body;
-
-    try {
-      // JSON dosyasını okuyun
-      const data = fs.readFileSync(jsonFilePath, 'utf8');
-      const blogs = JSON.parse(data);
-
-      // Yeni blogu ekleyin
-      blogs.push(newBlog);
-
-      // JSON dosyasını güncelleyin
-      fs.writeFileSync(jsonFilePath, JSON.stringify(blogs, null, 2));
-
-      res.status(200).json({ message: 'Blog added successfully' });
-    } catch (error) {
-      console.error('File system error:', error);
-      res.status(500).json({ error: 'Failed to add blog post' });
-    }
+    // Kodunuz buraya
   } else {
     res.setHeader('Allow', ['POST']);
     res.status(405).end(`Method ${req.method} Not Allowed`);
