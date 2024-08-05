@@ -28,8 +28,12 @@ const AddBlog = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to add blog post');
+        const errorMessage = await response.text();
+        throw new Error(`Failed to add blog post: ${errorMessage}`);
       }
+      
+      const result = await response.json();
+      console.log(result); // Yanıtı kontrol edin
       alert('Blog added successfully');
       setTitle('');
       setAuthor('');
