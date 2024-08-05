@@ -56,17 +56,17 @@ app.post('/api/blogs', (req, res) => {
 app.delete('/api/blogs/:id', (req, res) => {
   const blogId = req.params.id;
   try {
-    const blogs = readBlogs();
-    const updatedBlogs = blogs.filter(blog => blog.id !== blogId);
+      const blogs = readBlogs();
+      const updatedBlogs = blogs.filter(blog => blog.id !== blogId);
 
-    if (blogs.length === updatedBlogs.length) {
-      return res.status(404).json({ message: 'Blog not found' });
-    }
+      if (blogs.length === updatedBlogs.length) {
+          return res.status(404).json({ message: 'Blog not found' });
+      }
 
-    writeBlogs(updatedBlogs);
-    res.status(200).json({ message: 'Blog deleted successfully' });
+      writeBlogs(updatedBlogs);
+      res.status(200).json({ message: 'Blog deleted successfully' });
   } catch (error) {
-    res.status(500).json({ message: 'Failed to delete blog post' });
+      res.status(500).json({ message: 'Failed to delete blog post' });
   }
 });
 

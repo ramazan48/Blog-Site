@@ -23,7 +23,7 @@ const Home = () => {
   
     const handleDelete = async (id) => {
         try {
-          const response = await fetch(`https://blog-site-pink-eight.vercel.app/api/deletePost${id}`, {
+          const response = await fetch(`https://blog-site-pink-eight.vercel.app/api/blogs/${id}`, {
             method: 'DELETE',
           });
       
