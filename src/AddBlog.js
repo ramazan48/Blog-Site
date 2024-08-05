@@ -21,7 +21,7 @@ const AddBlog = () => {
     };
 
     try {
-      const response = await fetch('/BlogPosts.json', {
+      const response = await fetch('/api/addBlog', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newBlog),
