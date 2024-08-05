@@ -1,66 +1,53 @@
-const fs = require('fs');
 const express = require('express');
-const cors = require('cors');
+const fs = require('fs');
+const path = require('path');
 const app = express();
-const PORT = 3000; 
+const port = process.env.PORT || 3000;
 
-app.use(cors());
 app.use(express.json());
 
-const filePath = './blogposts.json';
+const BLOGS_FILE_PATH = path.join(__dirname, 'BlogPosts.json');
 
-app.get('/posts', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'BlogPosts.json'));
+// Middleware to read blogs from the file
+const readBlogs = () => {
+  const rawData = fs.readFileSync(BLOGS_FILE_PATH);
+  return JSON.parse(rawData);
+};
+
+// Middleware to write blogs to the file
+const writeBlogs = (data) => {
+  fs.writeFileSync(BLOGS_FILE_PATH, JSON.stringify(data, null, 2));
+};
+
+// Get all blogs
+app.get('/api/blogs', (req, res) => {
+  const blogs = readBlogs();
+  res.json(blogs);
 });
 
-app.get('/posts', (req, res) => {
-  fs.readFile(filePath, 'utf8', (err, data) => {
-    if (err) {
-      res.status(500).send('Error reading data');
-    } else {
-      res.send(JSON.parse(data));
-    }
-  });
+// Add a new blog
+app.post('/api/blogs', (req, res) => {
+  const newBlog = req.body;
+  const blogs = readBlogs();
+  blogs.push(newBlog);
+  writeBlogs(blogs);
+  res.status(201).json(newBlog);
 });
 
-app.post('/posts', (req, res) => {
-  fs.readFile(filePath, 'utf8', (err, data) => {
-    if (err) {
-      res.status(500).send('Error reading data');
-    } else {
-      const posts = JSON.parse(data);
-      const newPost = req.body;
-      posts.push(newPost);
-      fs.writeFile(filePath, JSON.stringify(posts, null, 2), (err) => {
-        if (err) {
-          res.status(500).send('Error writing data');
-        } else {
-          res.status(201).send('Post added');
-        }
-      });
-    }
-  });
+// Delete a blog by ID
+app.delete('/api/blogs/:id', (req, res) => {
+  const blogId = req.params.id;
+  const blogs = readBlogs();
+  const updatedBlogs = blogs.filter(blog => blog.id !== blogId);
+
+  if (blogs.length === updatedBlogs.length) {
+    return res.status(404).json({ message: 'Blog not found' });
+  }
+
+  writeBlogs(updatedBlogs);
+  res.status(200).json({ message: 'Blog deleted successfully' });
 });
 
-app.delete('/posts/:id', (req, res) => {
-  const { id } = req.params;
-  fs.readFile(filePath, 'utf8', (err, data) => {
-    if (err) {
-      res.status(500).send('Error reading data');
-    } else {
-      let posts = JSON.parse(data);
-      posts = posts.filter(post => post.id !== id);
-      fs.writeFile(filePath, JSON.stringify(posts, null, 2), (err) => {
-        if (err) {
-          res.status(500).send('Error writing data');
-        } else {
-          res.send('Post deleted');
-        }
-      });
-    }
-  });
-});
-
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
 });
