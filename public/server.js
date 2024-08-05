@@ -53,7 +53,7 @@ app.post('/api/blogs', (req, res) => {
 });
 
 // Delete a blog by ID
-app.delete('/api/blogs/:id', (req, res) => {
+app.delete('/api/deletePost/:id', (req, res) => {
   const blogId = req.params.id;
   try {
       const blogs = readBlogs();
