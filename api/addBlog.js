@@ -1,32 +1,16 @@
-// netlify/functions/addBlog.js
-const fs = require('fs');
-const path = require('path');
-
-exports.handler = async (event) => {
-  if (event.httpMethod === 'POST') {
-    const newBlog = JSON.parse(event.body);
-    const jsonFilePath = path.join(__dirname, '../public/BlogPosts.json');
-
-    try {
-      const data = fs.readFileSync(jsonFilePath, 'utf8');
-      let blogs = JSON.parse(data);
-      blogs.push(newBlog);
-      fs.writeFileSync(jsonFilePath, JSON.stringify(blogs, null, 2));
-      return {
-        statusCode: 200,
-        body: JSON.stringify({ message: 'Blog added successfully' }),
-      };
-    } catch (error) {
-      console.error('Error:', error);
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ error: 'Failed to add blog post' }),
-      };
+export default async function handler(req, res) {
+  try {
+    if (req.method === 'POST') {
+      const blogPost = req.body;
+      // Blog ekleme işlemleri
+      // Örneğin, bir veritabanına ekleme işlemi
+      res.status(200).json({ message: 'Blog added successfully' });
+    } else {
+      res.setHeader('Allow', ['POST']);
+      res.status(405).end(`Method ${req.method} Not Allowed`);
     }
-  } else {
-    return {
-      statusCode: 405,
-      body: JSON.stringify({ error: 'Method Not Allowed' }),
-    };
+  } catch (error) {
+    console.error('Server error:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
-};
+}
