@@ -7,7 +7,7 @@ const Home = () => {
     useEffect(() => {
       const fetchBlogs = async () => {
         try {
-          const response = await fetch('https://grand-unicorn-c0189b.netlify.app/BlogPosts.json');
+          const response = await fetch('/BlogPosts.json');
                 if (!response.ok) {
                     throw new Error('Failed to fetch blogs');
                 }
