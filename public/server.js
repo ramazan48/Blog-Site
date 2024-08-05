@@ -5,24 +5,19 @@ const app = express();
 
 app.use(express.json());
 
-// JSON dosyasının yolu
 const jsonFilePath = path.join(__dirname, 'BlogPosts.json');
 
-// Veriyi ekleme endpoint'i
 app.post('/api/addBlog', (req, res) => {
   const newBlog = req.body;
 
-  // JSON dosyasını oku
   fs.readFile(jsonFilePath, 'utf8', (err, data) => {
     if (err) {
       return res.status(500).json({ error: 'Failed to read JSON file' });
     }
 
-    // JSON verisini çöz
     const blogs = JSON.parse(data);
     blogs.push(newBlog);
 
-    // JSON dosyasını güncelle
     fs.writeFile(jsonFilePath, JSON.stringify(blogs, null, 2), (err) => {
       if (err) {
         return res.status(500).json({ error: 'Failed to write JSON file' });
