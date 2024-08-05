@@ -1,67 +1,23 @@
+// server.js veya app.js
+
 const express = require('express');
-const fs = require('fs');
-const path = require('path');
 const app = express();
+const port = process.env.PORT || 3000;
 
-app.use(express.json());
+// Middleware'leri tanımlayın
+app.use(express.json()); // JSON gövdesini işlemek için
 
-const jsonFilePath = path.join(__dirname, 'BlogPosts.json');
-
-// Get all blogs
-app.get('/api/blogs', (req, res) => {
-  fs.readFile(jsonFilePath, 'utf8', (err, data) => {
-    if (err) {
-      return res.status(500).json({ error: 'Failed to read JSON file' });
-    }
-    res.json(JSON.parse(data));
-  });
+// DELETE isteği için route
+app.delete('/api/deleteBlog/:id', (req, res) => {
+  const blogId = req.params.id;
+  // Blog silme işlemini burada gerçekleştirin (veritabanından silme vb.)
+  
+  // Örnek: Silme işlemi başarılıysa yanıt gönder
+  res.status(200).json({ message: 'Blog deleted successfully' });
 });
 
-// Add a new blog
-app.post('/api/addBlog', (req, res) => {
-  const newBlog = req.body;
+// Diğer route'lar veya middleware'ler...
 
-  fs.readFile(jsonFilePath, 'utf8', (err, data) => {
-    if (err) {
-      return res.status(500).json({ error: 'Failed to read JSON file' });
-    }
-
-    const blogs = JSON.parse(data);
-    blogs.push(newBlog);
-
-    fs.writeFile(jsonFilePath, JSON.stringify(blogs, null, 2), (err) => {
-      if (err) {
-        return res.status(500).json({ error: 'Failed to write JSON file' });
-      }
-
-      res.status(200).json({ message: 'Blog added successfully' });
-    });
-  });
-});
-
-// Delete a blog
-app.delete('/api/deleteBlog', (req, res) => {
-  const { id } = req.query;
-
-  fs.readFile(jsonFilePath, 'utf8', (err, data) => {
-    if (err) {
-      return res.status(500).json({ error: 'Failed to read JSON file' });
-    }
-
-    let blogs = JSON.parse(data);
-    blogs = blogs.filter(blog => blog.id !== id);
-
-    fs.writeFile(jsonFilePath, JSON.stringify(blogs, null, 2), (err) => {
-      if (err) {
-        return res.status(500).json({ error: 'Failed to write JSON file' });
-      }
-
-      res.status(200).json({ message: 'Blog deleted successfully' });
-    });
-  });
-});
-
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
