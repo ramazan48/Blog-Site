@@ -23,7 +23,7 @@ const Home = () => {
   
     const handleDelete = async (id) => {
         try {
-          const response = await fetch(`/api/deletePost?id=${id}`, {
+          const response = await fetch(`/.netlify/functions/deletePost?id=${id}`, {
             method: 'DELETE',
           });
       
