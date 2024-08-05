@@ -21,7 +21,7 @@ const AddBlog = () => {
     };
 
     try {
-      const response = await fetch('http://blog-site-pink-eight/api/addBlog', {
+      const response = await fetch('https://blog-site-pink-eight.vercel.app/api/addBlog', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newBlog),
